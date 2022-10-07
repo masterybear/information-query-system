@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.mapper.VirtualUserMapper">
+
+    <resultMap id="selectMap" type="VirtualUser">
+        <result column="user_name" property="userName"/>
+        <result column="user_password" property="password"/>
+    </resultMap>
+
+    <select id="selectUsers" resultMap="selectMap">
+        select *
+        from vt_users
+        where user_name = #{userName}
+          and user_password = #{password};
+    </select>
+
+    <select id="selectName" resultMap="selectMap">
+        select *
+        from vt_users
+        where user_name = #{userName};
+    </select>
+
+    <insert id="addNew">
+        insert into vt_users(user_name, user_password)
+        values (#{userName}, #{password});
+    </insert>
+</mapper>
